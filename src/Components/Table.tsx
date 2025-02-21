@@ -1,11 +1,16 @@
-import React from "react";
 
 export interface TableProps<T, U> {
   tableHeaders: U[];
   columnData: T[];
 }
 
-const Table = <T extends string | number, U extends string>({
+export interface UserData {
+  id: number;
+  Name: string;
+  RollNo: number;
+}
+
+const Table = <T extends string | number | UserData, U extends string>({
   columnData,
   tableHeaders,
 }: TableProps<T, U>) => {
@@ -22,13 +27,25 @@ const Table = <T extends string | number, U extends string>({
           })}
         </tr>
         <tr>
-          {columnData?.map((elem, index: number) => {
+          {Array.isArray(columnData) ? (
+            columnData.map((key) => {
+              return Object.keys(key).map((elem: string | number) => {
+                return <td className="border border-gray-500 text-center">{(key as Record<string, any>)[elem]}</td>;
+              });
+            })
+          ) : (
+            <></>
+          )}
+          {/* {columnData?.map((elem, index: number) => {
             return (
-              <td className="border text-center border-gray-500" key={index}>
-                {elem}
+              <td
+                className="border font-bold text-center border-gray-500"
+                key={index}
+              >
+                {elem}{" "}
               </td>
             );
-          })}
+          })} */}
         </tr>
       </table>
     </>

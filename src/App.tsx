@@ -1,15 +1,21 @@
 import { useState } from "react";
-import Table, { TableProps } from "./Components/Table";
+import Table, { TableProps, UserData } from "./Components/Table";
 
 function App() {
-  const [columnData, setColumnData] = useState<string[]>([
+  const [columnData] = useState<string[]>([
     "Id",
     "Name",
     "Roll No.",
-    "Last Name"
+    "Last Name",
   ]);
 
-  const [column, setColumns] = useState<(string | number)[]>([1, "Karan", 20]);
+  const [column] = useState<(string | number | UserData)[]>([
+    {
+      id: 1,
+      Name: "Karan",
+      RollNo: 20,
+    },
+  ]);
 
   return (
     <>
