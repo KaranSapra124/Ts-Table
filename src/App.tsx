@@ -1,8 +1,19 @@
+import { useState } from "react";
+import Table, { TableProps } from "./Components/Table";
+
 function App() {
-  
+  const [columnData, setColumnData] = useState<string[]>([
+    "Id",
+    "Name",
+    "Roll No.",
+    "Last Name"
+  ]);
+
+  const [column, setColumns] = useState<(string | number)[]>([1, "Karan", 20]);
+
   return (
     <>
-      <h1 className="text-red-500 text-4xl">Hello</h1>
+      <Table columnData={column} tableHeaders={columnData} />
     </>
   );
 }
