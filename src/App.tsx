@@ -15,6 +15,11 @@ function App() {
       Name: "Karan",
       RollNo: 20,
     },
+    {
+      id: 2,
+      Name: "Rahul",
+      RollNo: 24,
+    }
   ]);
 
   return (
