@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Table, { TableProps, UserData } from "./Components/Table";
+import Table, {  UserData } from "./Components/Table";
 
 function App() {
   const [columnData] = useState<string[]>([
