@@ -25,24 +25,34 @@ const Table = <T extends string | number | UserData, U extends string>({
             );
           })}
         </tr>
-        <tr>
-          {Array.isArray(columnData) &&
-            columnData.map((key) => {
+        {Array.isArray(columnData) && (
+          <tbody className="w-full">
+            {columnData.map((key, index) => {
               if (typeof key === "object") {
-                return Object.keys(key).map((elem: string | number) => {
-                  return (
-                    <td className="border border-gray-500 text-center">
-                      {(key as Record<string, any>)[elem]}
-                    </td>
-                  );
-                });
+                return (
+                  <tr key={index}>
+                    {Object.keys(key).map((elem) => (
+                      <td
+                        key={elem}
+                        className="border border-gray-500 text-center"
+                      >
+                        {(key as Record<string, any>)[elem]}
+                      </td>
+                    ))}
+                  </tr>
+                );
               } else {
                 return (
-                  <td className="border border-gray-500 text-center">{key}</td>
+                  <tr key={index}>
+                    <td className="border border-gray-500 text-center">
+                      {key}
+                    </td>
+                  </tr>
                 );
               }
             })}
-        </tr>
+          </tbody>
+        )}
       </table>
     </>
   );
