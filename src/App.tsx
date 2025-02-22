@@ -9,7 +9,7 @@ function App() {
     "Last Name",
   ]);
 
-  const [column] = useState<(string | number | UserData)[]>([
+  const [column] = useState<UserData[]>([
     {
       Id: 1,
       Name: "Karan",

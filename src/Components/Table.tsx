@@ -18,7 +18,7 @@ const Table = <T extends UserData, U extends string>({
   tableHeaders,
 }: // className,
 TableProps<T, U>) => {
-  const [headerData, setHeaderData] = useState<U[]>(tableHeaders);
+  const [headerData] = useState<U[]>(tableHeaders);
   const [columnsData, setColumnsData] = useState<(UserData | T)[]>(columnData);
   const [filtered, setFiltered] = useState<Boolean>(false);
 
