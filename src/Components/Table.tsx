@@ -1,17 +1,20 @@
 export interface TableProps<T, U> {
   tableHeaders: U[];
   columnData: T[];
+  // className: string;
 }
 
 export interface UserData {
   id: number;
   Name: string;
   RollNo: number;
+  LastName: string;
 }
 
 const Table = <T extends string | number | UserData, U extends string>({
   columnData,
   tableHeaders,
+  // className,
 }: TableProps<T, U>) => {
   return (
     <>
@@ -36,7 +39,8 @@ const Table = <T extends string | number | UserData, U extends string>({
                         key={elem}
                         className="border border-gray-500 text-center"
                       >
-                        {(key as Record<string, any>)[elem]}
+                        {/* {console.log(key[elem])} */}
+                        {(key as Record<string, any>)[elem] || "N/A"}
                       </td>
                     ))}
                   </tr>

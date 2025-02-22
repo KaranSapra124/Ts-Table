@@ -14,17 +14,14 @@ function App() {
       id: 1,
       Name: "Karan",
       RollNo: 20,
+      LastName: "",
     },
     {
       id: 2,
       Name: "Rahul",
       RollNo: 24,
+      LastName: "",
     },
-    {
-      id: 3,
-      Name: "Rahul",
-      RollNo: 24,
-    }
   ]);
 
   return (
