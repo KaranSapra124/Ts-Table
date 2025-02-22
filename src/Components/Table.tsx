@@ -3,34 +3,32 @@ import { useState } from "react";
 export interface TableProps<T, U> {
   tableHeaders: U[];
   columnData: T[];
-  // className: string;
 }
 
 export interface UserData {
   Id: number;
-  Name: string;
-  RollNo: number;
-  LastName: string;
+  ProductName: string;
+  Stock: number;
+  Price: number;
 }
 
-const Table = <T extends UserData, U extends string>({
+const Table = <T extends Record<string, any>, U extends string>({
   columnData,
   tableHeaders,
-}: // className,
-TableProps<T, U>) => {
+}: TableProps<T, U>) => {
   const [headerData] = useState<U[]>(tableHeaders);
-  const [columnsData, setColumnsData] = useState<(UserData | T)[]>(columnData);
+  const [columnsData, setColumnsData] = useState<T[]>(columnData);
   const [filtered, setFiltered] = useState<Boolean>(false);
 
   const handleFilters = (item: string) => {
     const selectedKey: string = item.replace(/[ .]/g, "").toString();
 
-    const filteredData = columnsData.sort((a: UserData, b: UserData) => {
+    const filteredData = columnsData.sort((a, b) => {
       return filtered
-        ? (b[selectedKey as keyof UserData] as number) -
-            (a[selectedKey as keyof UserData] as number)
-        : (a[selectedKey as keyof UserData] as number) -
-            (b[selectedKey as keyof UserData] as number);
+        ? (b[selectedKey as keyof T] as number) -
+            (a[selectedKey as keyof T] as number)
+        : (a[selectedKey as keyof T] as number) -
+            (b[selectedKey as keyof T] as number);
     });
 
     setColumnsData(filteredData);
@@ -72,7 +70,6 @@ TableProps<T, U>) => {
                         key={elem}
                         className="border border-gray-500 text-center"
                       >
-                        {/* {console.log(key[elem])} */}
                         {(key as Record<string, any>)[elem] || "N/A"}
                       </td>
                     ))}
