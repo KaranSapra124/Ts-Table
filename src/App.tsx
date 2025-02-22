@@ -11,14 +11,20 @@ function App() {
 
   const [column] = useState<(string | number | UserData)[]>([
     {
-      id: 1,
+      Id: 1,
       Name: "Karan",
       RollNo: 20,
       LastName: "",
     },
     {
-      id: 2,
+      Id: 2,
       Name: "Rahul",
+      RollNo: 24,
+      LastName: "",
+    },
+    {
+      Id: 3,
+      Name: "Bhupender",
       RollNo: 24,
       LastName: "",
     },

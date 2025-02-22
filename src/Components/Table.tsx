@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 export interface TableProps<T, U> {
   tableHeaders: U[];
   columnData: T[];
@@ -5,32 +7,63 @@ export interface TableProps<T, U> {
 }
 
 export interface UserData {
-  id: number;
+  Id: number;
   Name: string;
   RollNo: number;
   LastName: string;
 }
 
-const Table = <T extends string | number | UserData, U extends string>({
+const Table = <T extends UserData, U extends string>({
   columnData,
   tableHeaders,
-  // className,
-}: TableProps<T, U>) => {
+}: // className,
+TableProps<T, U>) => {
+  const [headerData, setHeaderData] = useState<U[]>(tableHeaders);
+  const [columnsData, setColumnsData] = useState<(UserData | T)[]>(columnData);
+  const [filtered, setFiltered] = useState<Boolean>(false);
+
+  const handleFilters = (item: string) => {
+    const selectedKey: string = item.replace(/[ .]/g, "").toString();
+
+    const filteredData = columnsData.sort((a: UserData, b: UserData) => {
+      return filtered
+        ? (b[selectedKey as keyof UserData] as number) -
+            (a[selectedKey as keyof UserData] as number)
+        : (a[selectedKey as keyof UserData] as number) -
+            (b[selectedKey as keyof UserData] as number);
+    });
+
+    setColumnsData(filteredData);
+    setFiltered(!filtered);
+  };
   return (
     <>
       <table className="border w-screen">
         <tr>
-          {tableHeaders?.map((elem, index: number) => {
+          {headerData?.map((elem, index: number) => {
             return (
-              <th className="border text-center border-gray-500" key={index}>
-                {elem}
+              <th
+                className="border w-52  text-center border-gray-500"
+                key={index}
+              >
+                <div className="flex justify-center">
+                  {elem}
+                  {elem !== "Name" && elem !== "Last Name" && (
+                    <button
+                      onClick={() => handleFilters(elem)}
+                      className="border mx-10 p-0.5 rounded-full m-1"
+                    >
+                      🚀
+                    </button>
+                  )}
+                </div>
               </th>
             );
           })}
         </tr>
         {Array.isArray(columnData) && (
           <tbody className="w-full">
-            {columnData.map((key, index) => {
+            {columnsData.map((key, index) => {
               if (typeof key === "object") {
                 return (
                   <tr key={index}>
