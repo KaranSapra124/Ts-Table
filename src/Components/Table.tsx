@@ -36,24 +36,24 @@ const Table = <T extends Record<string, any>, U extends string>({
   };
   return (
     <>
-      <table className="border w-screen">
+      <table className="border lg:w-screen">
         <tr>
           {headerData?.map((elem, index: number) => {
             return (
               <th
-                className="border w-52  text-center border-gray-500"
+                className="border w-52  text-center border-gray-200"
                 key={index}
               >
                 <div className="flex justify-center">
                   {elem}
-                  {elem !== "Name" && elem !== "Last Name" && (
+                  {/* {elem !== "Name" && elem !== "Last Name" && ( */}
                     <button
                       onClick={() => handleFilters(elem)}
                       className="border mx-10 p-0.5 rounded-full m-1"
                     >
                       🚀
                     </button>
-                  )}
+                  {/* )} */}
                 </div>
               </th>
             );
@@ -68,7 +68,7 @@ const Table = <T extends Record<string, any>, U extends string>({
                     {Object.keys(key).map((elem) => (
                       <td
                         key={elem}
-                        className="border border-gray-500 text-center"
+                        className="border border-gray-200 text-center"
                       >
                         {(key as Record<string, any>)[elem] || "N/A"}
                       </td>
@@ -78,7 +78,7 @@ const Table = <T extends Record<string, any>, U extends string>({
               } else {
                 return (
                   <tr key={index}>
-                    <td className="border border-gray-500 text-center">
+                    <td className="border border-gray-200 text-center">
                       {key}
                     </td>
                   </tr>
